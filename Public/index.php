@@ -11,7 +11,6 @@ $rewritten = [
     '/config/type_absence',
     '/hr/page_principale',
     '/hr/jours_chomes',
-    '/admin/db_sauve',
 ];
 
 if (!in_array($uri, $rewritten, true)) {
@@ -33,9 +32,6 @@ switch ($urn) {
     case 'hr':
         $_GET['onglet'] = $resource;
         require_once ROOT_PATH . 'hr/hr_index.php';
-    case 'admin':
-        $_GET['onglet'] = $resource;
-        require_once ROOT_PATH . 'admin/admin_index.php';
         break;
 
     default:
