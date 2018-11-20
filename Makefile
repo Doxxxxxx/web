@@ -33,9 +33,8 @@ destroy: ## Détruit l'instance
 reinstall: destroy install ## Reset usine
 
 ## Administration
-restaure: ## Restaure : monte en base le dernier fichier possible
-	a
-
+restore: destroy setup ## Restaure la dernière sauvegarde
+	App/Tools/restore
 
 ## CI
 test: ## Lance les tests unitaires
