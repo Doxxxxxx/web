@@ -20,6 +20,7 @@ $rewritten = [
     '/hr/traitement_demandes',
     '/hr/jours_chomes',
     '/hr/jours_fermeture',
+    '/hr/cloture_year',
     '/admin/db_sauve',
 ];
 
