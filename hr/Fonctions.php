@@ -1460,7 +1460,7 @@ class Fonctions
             $tab_commentaire_saisie        = getpost_variable('tab_commentaire_saisie');
 
             $return .= \hr\Fonctions::ajout_conges($tab_champ_saisie, $tab_commentaire_saisie);
-            redirect( ROOT_PATH .'hr/hr_index.php', false);
+            redirect( ROOT_PATH . 'hr/page_principale', false);
             exit;
         } elseif ( $ajout_global == "TRUE" ) {
 
@@ -1469,7 +1469,7 @@ class Fonctions
             $tab_new_comment_all         = getpost_variable('tab_new_comment_all');
 
             $return .= \hr\Fonctions::ajout_global($tab_new_nb_conges_all, $tab_calcul_proportionnel, $tab_new_comment_all);
-            redirect( ROOT_PATH .'hr/hr_index.php', false);
+            redirect( ROOT_PATH . 'hr/page_principale', false);
             exit;
         } elseif ( $ajout_groupe == "TRUE" ) {
 
@@ -1479,7 +1479,7 @@ class Fonctions
             $choix_groupe                = getpost_variable('choix_groupe');
 
             \hr\Fonctions::ajout_global_groupe($choix_groupe, $tab_new_nb_conges_all, $tab_calcul_proportionnel, $tab_new_comment_all);
-            redirect( ROOT_PATH .'hr/hr_index.php', false);
+            redirect( ROOT_PATH . 'hr/page_principale', false);
             exit;
         } else {
             $return .= \hr\Fonctions::saisie_ajout($tab_type_cong);
@@ -1925,18 +1925,18 @@ class Fonctions
             $tab_commentaire_saisie       = getpost_variable('tab_commentaire_saisie'); //a vérifier
             $return .= \hr\Fonctions::cloture_users($tab_type_cong, $tab_cloture_users, $tab_commentaire_saisie);
 
-            redirect( ROOT_PATH .'hr/hr_index.php', false);
+            redirect( ROOT_PATH .'hr/page_principale', false);
             exit;
         } elseif ($cloture_globale=="TRUE") {
             \hr\Fonctions::cloture_globale($tab_type_cong);
 
-            redirect( ROOT_PATH .'hr/hr_index.php', false);
+            redirect( ROOT_PATH .'hr/page_principale', false);
             exit;
         } elseif ($cloture_groupe=="TRUE") {
             $choix_groupe            = getpost_variable('choix_groupe');
             $return .= \hr\Fonctions::cloture_globale_groupe($choix_groupe, $tab_type_cong);
 
-            redirect( ROOT_PATH .'hr/hr_index.php', false);
+            redirect( ROOT_PATH .'hr/page_principale', false);
             exit;
         } else {
             $return .= \hr\Fonctions::saisie_cloture($tab_type_cong);
