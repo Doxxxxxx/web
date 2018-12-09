@@ -50,7 +50,7 @@ global $environnement;
         </script>
         <script type="text/javascript" src="<?= JS_PATH ?>rollbar.js?v=<?= $config_php_conges_version ?>"></script>
         <script type="text/javascript" src="<?= NODE_PATH ?>jquery/dist/jquery.min.js?v=<?= $config_php_conges_version ?>"></script>
-        <script type="text/javascript" src="<?= NODE_PATH ?>vue/dist/vue.min.js?v=<?= $config_php_conges_version ?>"></script>
+        <script type="text/javascript" src="<?= NODE_PATH ?>vue/dist/vue.js?v=<?= $config_php_conges_version ?>"></script>
         <script type="text/javascript" src="<?= JS_PATH ?>reboot.js?v=<?= $config_php_conges_version ?>"></script>
         <?= $additional_head; ?>
     </head>
