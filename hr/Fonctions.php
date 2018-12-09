@@ -96,7 +96,7 @@ class Fonctions
         if ( count($tab_all_users)!=0 ) {
             // constitution de la liste (séparé par des virgules) des logins ...
             $list_users="";
-            foreach($tab_all_users as $current_login => $tab_current_user) {
+            foreach ($tab_all_users as $current_login => $tab_current_user) {
                 if ($list_users=="") {
                     $list_users= "'$current_login'" ;
                 } else {
@@ -403,7 +403,7 @@ class Fonctions
         // recup dans un tableau de tableau les infos des types de conges et absences
         $tab_tout_type_abs = recup_tableau_tout_types_abs();
 
-        while($elem_tableau = each($tab_checkbox_annule)) {
+        while ($elem_tableau = each($tab_checkbox_annule)) {
             $champs = explode("--", $elem_tableau['value']);
             $user_login=$champs[0];
             $user_nb_jours_pris=$champs[1];
@@ -1116,7 +1116,7 @@ class Fonctions
                 $sql1="SELECT u_login, u_quotite FROM conges_users WHERE u_login IN ($list_users_du_resp) ORDER BY u_login ";
                 $ReqLog1 = $db->query($sql1);
 
-                while($resultat1 = $ReqLog1->fetch_array()) {
+                while ($resultat1 = $ReqLog1->fetch_array()) {
                     $current_login  =$resultat1["u_login"];
                     $current_quotite=$resultat1["u_quotite"];
 
@@ -1331,7 +1331,7 @@ class Fonctions
                         $return .= '<td align="center" class="histo">' . $champ_saisie_conges . '</td>';
                     }
                     if ($config->isCongesExceptionnelsActive()) {
-                        foreach($tab_type_conges_exceptionnels as $id_conges => $libelle) {
+                        foreach ($tab_type_conges_exceptionnels as $id_conges => $libelle) {
                             /** le champ de saisie est <input type="text" name="tab_champ_saisie[valeur de u_login][id_du_type_de_conges]" value="[valeur du nb de jours ajouté saisi]"> */
                             $champ_saisie_conges="<input class=\"form-control\" type=\"text\" name=\"tab_champ_saisie[$current_login][$id_conges]\" size=\"6\" maxlength=\"6\" value=\"0\">";
                             $return .= '<td><i>(' . $tab_conges[$libelle]['solde'] . ')</i></td>';
