@@ -21,6 +21,9 @@ $rewritten = [
     '/hr/jours_chomes',
     '/hr/jours_fermeture',
     '/hr/cloture_year',
+    '/hr/liste_planning',
+    '/hr/ajout_planning',
+    '/hr/modif_planning',
     '/admin/db_sauve',
 ];
 
