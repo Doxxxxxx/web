@@ -12,12 +12,8 @@ help:
 setup: ## Crée l'application
 	App/Tools/setup ${nom_instance}
 
-save: ## Sauvegarde la DB
-	App/Tools/savedb
-
 check: ## Controle les prérequis et l'intégrité
 	App/Tools/check
-
 
 update: save ## Met l'application à la toute dernière version (patch compris)
 	App/Tools/update
@@ -33,7 +29,10 @@ destroy: ## Détruit l'instance
 reinstall: destroy install ## Reset usine
 
 ## Administration
-restore: destroy setup ## Restaure la dernière sauvegarde
+save: ## Sauvegarde la DB
+	App/Tools/savedb
+
+restore: destroy check ## Restaure la dernière sauvegarde
 	App/Tools/restore
 
 ## CI
