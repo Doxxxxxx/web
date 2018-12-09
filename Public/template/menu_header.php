@@ -64,7 +64,7 @@ function sousmenuHR()
     <a class="secondary" href="' . ROOT_PATH . 'hr/liste_groupe">Groupes</a>';
 
     if ($config->canUserSaisieDemande()) {
-        $return .= '<a class="secondary" href="' . ROOT_PATH . 'hr/hr_index.php?onglet=traitement_demandes">Validation de congés</a>';
+        $return .= '<a class="secondary" href="' . ROOT_PATH . 'hr/traitement_demandes">Validation de congés</a>';
     }
     $return .= '<a class="secondary" href="' . ROOT_PATH . 'hr/hr_index.php?onglet=ajout_conges">Crédit de congés</a>
     <a class="secondary" href="' . ROOT_PATH . 'hr/jours_chomes">Jours fériés</a>
