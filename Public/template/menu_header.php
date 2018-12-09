@@ -228,7 +228,7 @@ function sousmenuEmploye()
                     <?= sousmenuEmploye(); ?>
                 <?php endif; ?>
                 <?php if('active' === $calendarActive || $urn=='utilisateur' || $urn=='responsable' || in_array($urn, ['hr', 'admin', 'config'])): ?>
-                <a class="primary <?= $calendarActive ?>" href="<?= ROOT_PATH ?>calendrier.php">
+                <a class="primary <?= $calendarActive ?>" href="<?= ROOT_PATH ?>calendrier">
                     <i class="fa fa-calendar"></i><?= _('button_calendar') ?>
                 </a>
                 <?php endif; ?>
