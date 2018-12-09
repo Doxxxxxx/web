@@ -819,7 +819,6 @@ class Fonctions
     {
         $config = new \App\Libraries\Configuration(\includes\SQL::singleton());
 
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL); ;
         $return = '';
 
         // on initialise le tableau global des jours fériés s'il ne l'est pas déjà :
@@ -1514,7 +1513,6 @@ class Fonctions
     // cloture / debut d'exercice pour TOUS les users d'un groupe'
     public static function cloture_globale_groupe($group_id, $tab_type_conges) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
         $return = '';
 
         // recup de la liste de TOUS les users du groupe
@@ -1533,7 +1531,6 @@ class Fonctions
     // cloture / debut d'exercice pour TOUS les users du resp (ou grand resp)
     public static function cloture_globale($tab_type_conges) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
         $return = '';
 
         // recup de la liste de TOUS les users dont $resp_login est responsable
@@ -1656,7 +1653,6 @@ class Fonctions
     // cloture / debut d'exercice user par user pour les users du resp (ou grand resp)
     public static function cloture_users($tab_type_conges, $tab_cloture_users, $tab_commentaire_saisie) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
         $return = '';
 
         // recup de la liste de TOUS les users dont $resp_login est responsable
@@ -1679,7 +1675,7 @@ class Fonctions
 
     public static function affichage_cloture_globale_groupe($tab_type_conges) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $return = '';
 
         /***********************************************************************/
@@ -1735,7 +1731,7 @@ class Fonctions
 
     public static function affichage_cloture_globale_pour_tous($tab_type_conges) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $return = '';
 
         /************************************************************/
@@ -1799,7 +1795,7 @@ class Fonctions
 
     public static function affichage_cloture_user_par_user($tab_type_conges, $tab_all_users_du_hr, $tab_all_users_du_grand_resp) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $return = '';
 
         /************************************************************/
@@ -1864,7 +1860,6 @@ class Fonctions
     public static function saisie_cloture( $tab_type_conges) : string
     {
         $config = new \App\Libraries\Configuration(\includes\SQL::singleton());
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
         $return = '';
 
         // recup de la liste de TOUS les users dont $resp_login est responsable
@@ -2105,16 +2100,16 @@ class Fonctions
         \hr\Fonctions::get_tableau_jour_fermeture($year, $tab_year,  $groupe_id);
         // navigation
         $onglet = htmlentities(getpost_variable('onglet'), ENT_QUOTES | ENT_HTML401);
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $return = '<div class="btn-group pull-right">';
-        $prev_link = "$PHP_SELF?onglet=$onglet&year=". ($year - 1) . "&groupe_id=$groupe_id";
+        $prev_link = "$PHP_SELF?year=". ($year - 1) . "&groupe_id=$groupe_id";
         $return .= '<a href="' . $prev_link . '" class="btn btn-default"><i class="fa fa-chevron-left"></i></a>';
-        $currentLink = "$PHP_SELF?onglet=$onglet&year=". date('Y') . "&groupe_id=$groupe_id";
+        $currentLink = "$PHP_SELF?year=". date('Y') . "&groupe_id=$groupe_id";
         $return .= '<a href="' . $currentLink . '" class="btn btn-default"><i class="fa fa-home" title="Retourner à l\'année courante"></i></a>';
-        $next_link = "$PHP_SELF?onglet=$onglet&year=". ($year + 1) . "&groupe_id=$groupe_id";
+        $next_link = "$PHP_SELF?year=". ($year + 1) . "&groupe_id=$groupe_id";
         $return .= '<a href="' . $next_link . '" class="btn btn-default"><i class="fa fa-chevron-right"></i></a>';
         $return .= '</div>';
-        $return .= '<a href="' . $PHP_SELF . '?onglet=saisie" class="btn btn-success pull-right" style="margin-right:15px">' . _('admin_jours_fermeture_titre') . '</a>';
+        $return .= '<a href="/hr/jours_fermeture?option=saisie" class="btn btn-success pull-right" style="margin-right:15px">' . _('admin_jours_fermeture_titre') . '</a>';
         $return .= '<h1>Calendrier des fermetures <span class="current-year">' .  $year . '</span></h1>';
 
         $return .= '<div class="calendar calendar-year">';
@@ -2187,7 +2182,7 @@ class Fonctions
 
     public static function commit_annul_fermeture($fermeture_id, $groupe_id) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $db = \includes\SQL::singleton();
         $return = '';
 
@@ -2252,7 +2247,7 @@ class Fonctions
         }
         log_action(0, "", "", $comment_log);
 
-        $return .= '<form action="' . $PHP_SELF . '" method="POST">';
+        $return .= '<form action="/hr/jours_fermeture?option=saisie" method="POST">';
         $return .= '<input class="btn btn-success" type="submit" value="' . _('form_ok') . '">';
         $return .= '</form>';
         $return .= '</div>';
@@ -2261,7 +2256,7 @@ class Fonctions
 
     public static function commit_new_fermeture($new_date_debut, $new_date_fin, $groupe_id, $id_type_conges) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $return = '';
 
         // on transforme les formats des dates
@@ -2349,11 +2344,11 @@ class Fonctions
 
     public static function confirm_annul_fermeture($fermeture_id, $groupe_id, $fermeture_date_debut, $fermeture_date_fin) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $return = '';
 
         $return .= '<div class="wrapper">';
-        $return .= '<form action="' . $PHP_SELF . '?onglet=saisie" method="POST">';
+        $return .= '<form action="/hr/jours_fermeture?option=saisie" method="POST">';
         $return .= _('divers_fermeture_du') . '<b>' . $fermeture_date_debut . '</b>' . _('divers_au') . '<b>' . $fermeture_date_fin . '</b>.';
         $return .= '<b>' . _('admin_annul_fermeture_confirm') . '</b>.<br>';
         $return .= '<input type="hidden" name="fermeture_id" value="' . $fermeture_id . '">';
@@ -2362,7 +2357,7 @@ class Fonctions
         $return .= '<input type="hidden" name="groupe_id" value="' . $groupe_id . '">';
         $return .= '<input type="hidden" name="choix_action" value="commit_annul_fermeture">';
         $return .= '<input class="btn btn-success" type="submit" value="' . _('form_continuer') . '">';
-        $return .= '<a class="btn" href="' . $PHP_SELF . '">' . _('form_cancel') . '</a>';
+        $return .= '<a class="btn" href="/hr/jours_fermeture?option=saisie">' . _('form_cancel') . '</a>';
         $return .= '</form>';
         $return .= '</div>';
         return $return;
@@ -2435,7 +2430,7 @@ class Fonctions
 
     public static function saisie_dates_fermeture($year, $groupe_id, $new_date_debut, $new_date_fin, $code_erreur) : string
     {
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
+        $PHP_SELF = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $return = '';
 
         $tab_date_debut=explode("/",$new_date_debut);   // date au format d/m/Y
@@ -2450,7 +2445,7 @@ class Fonctions
         $tab_year=array();
         \hr\Fonctions::get_tableau_jour_fermeture($year, $tab_year,  $groupe_id);
 
-        $return .= '<form id="form-fermeture" class="form-inline" role="form" action="' . $PHP_SELF . '?year=' . $year . '&onglet=saisie" method="POST">';
+        $return .= '<form id="form-fermeture" class="form-inline" role="form" action="/hr/jours_fermeture?option=saisie" method="POST">';
         $return .= '<div class="form-group">';
         $return .= '<label for="new_date_debut">' . _('divers_date_debut') . '</label><input type="text" class="form-control date" name="new_date_debut" value="' . $new_date_debut . '">';
         $return .= '</div>';
@@ -2475,7 +2470,6 @@ class Fonctions
     {
         $db = \includes\SQL::singleton();
         $config = new \App\Libraries\Configuration($db);
-        $PHP_SELF = filter_input(INPUT_SERVER, 'PHP_SELF', FILTER_SANITIZE_URL);
         $return = '<h1>Nouvelle fermeture</h1>';
         $return .= '<a href="' . ROOT_PATH . 'hr/jours_fermeture" class="admin-back"><i class="fa fa-arrow-circle-o-left"></i>Retour calendrier des fermetures</a>';
 
@@ -2487,7 +2481,7 @@ class Fonctions
         /********************/
 
         // AFFICHAGE TABLEAU
-        $return .= '<form action="' . $PHP_SELF . '?onglet=saisie" method="POST">';
+        $return .= '<form action="/hr/jours_fermeture?option=saisie" method="POST">';
         $return .= '<input type="hidden" name="groupe_id" value="0">';
         $return .= '<input type="hidden" name="choix_action" value="saisie_dates">';
         $return .= '<input class="btn btn-success" type="submit" value="' . _('admin_jours_fermeture_fermeture_pour_tous') . ' !">';
@@ -2503,7 +2497,7 @@ class Fonctions
 
             // AFFICHAGE TABLEAU
             $return .= '<div class="col-md-6">';
-            $return .= '<form action="' . $PHP_SELF . '?onglet=saisie" class="form-inline" method="POST">';
+            $return .= '<form action="/hr/jours_fermeture?option=saisie" class="form-inline" method="POST">';
             $return .= '<div class="form-group" style="margin-right: 10px;">';
             $ReqLog_gr = $db->query($sql_gr);
             $return .= '<select class="form-control" name="groupe_id">';
@@ -2552,7 +2546,7 @@ class Fonctions
                 $return .= _('divers_du') . ' <b>'. $date_affiche_1 . '</b> ' . _('divers_au') . ' <b>' . $date_affiche_2 . '</b>  (id ' . $fermeture_id . ')</b> ' . $groupe_name;
                 $return .= '</td>';
                 $return .= '<td>';
-                $return .= '<a href="' . $PHP_SELF . '?onglet=saisie&choix_action=annul_fermeture&fermeture_id=' . $fermeture_id . '&groupe_id=' . $groupe_id . '&fermeture_date_debut=' . $date_affiche_1 . '&fermeture_date_fin=' . $date_affiche_2 . '">' . _('admin_annuler_fermeture') . '</a>';
+                $return .= '<a href="/hr/jours_fermeture?option=saisie&choix_action=annul_fermeture&fermeture_id=' . $fermeture_id . '&groupe_id=' . $groupe_id . '&fermeture_date_debut=' . $date_affiche_1 . '&fermeture_date_fin=' . $date_affiche_2 . '">' . _('admin_annuler_fermeture') . '</a>';
                 $return .= '</td>';
                 $return .= '</tr>';
             }
@@ -2570,8 +2564,6 @@ class Fonctions
      */
     public static function pageJoursFermetureModule() : string
     {
-        // verif des droits du user à afficher la page
-        verif_droits_user("is_hr");
         $return = '';
 
         /*** initialisation des variables ***/
@@ -2626,10 +2618,10 @@ class Fonctions
         /*   COMPOSITION DES ONGLETS...  */
         /*********************************/
 
-        $onglet = htmlentities(getpost_variable('onglet'), ENT_QUOTES | ENT_HTML401);
+        $option = htmlentities(getpost_variable('option'), ENT_QUOTES | ENT_HTML401);
 
-        if (!$onglet) {
-            $onglet = 'calendar';
+        if (!$option) {
+            $option = 'calendar';
         }
 
         //initialisation de l'action par défaut
@@ -2639,14 +2631,13 @@ class Fonctions
 
         /***********************************/
         // AFFICHAGE DE LA PAGE
-        header_menu('', 'Libertempo : '._('divers_fermeture'));
+        //header_menu('', 'Libertempo : '._('divers_fermeture'));
 
-        $return .= '<div class="main-content">';
 
         // vérifie si les jours fériés sont saisie pour l'année en cours
         if ( (verif_jours_feries_saisis($date_debut_yyyy_mm_dd)==FALSE) && (verif_jours_feries_saisis($date_fin_yyyy_mm_dd)==FALSE) ) {
                 $code_erreur=1 ;  // code erreur : jour feriés non saisis
-                $onglet="calendar";
+                $option="calendar";
         }
 
         //initialisation de l'action demandée : saisie_dates, commit_new_fermeture pour enregistrer une fermeture, annul_fermeture pour confirmer une annulation, commit_annul_fermeture pour annuler une fermeture
@@ -2679,7 +2670,7 @@ class Fonctions
             }
         }
 
-        if ($onglet == 'calendar') {
+        if ($option == 'calendar') {
             // les jours fériés de l'annee de la periode saisie ne sont pas enregistrés
             if ($code_erreur==1) {
                 $return .= '<div class="alert alert-danger">' . _('admin_jours_fermeture_annee_non_saisie') . '</div>';
@@ -2714,7 +2705,7 @@ class Fonctions
             }
 
             $return .= '<div class="wrapper">';
-            if ($onglet == 'saisie') {
+            if ($option == 'saisie') {
                 $return .= \hr\Fonctions::saisie_dates_fermeture($year, $groupe_id, $new_date_debut, $new_date_fin, $code_erreur);
             }
         } elseif ($choix_action=="saisie_groupe") {
@@ -2728,7 +2719,6 @@ class Fonctions
         } elseif ($choix_action=="commit_annul_fermeture") {
             $return .= \hr\Fonctions::commit_annul_fermeture($fermeture_id, $groupe_id);
         }
-        $return .= '</div>';
 
         return $return;
     }

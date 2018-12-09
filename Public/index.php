@@ -19,6 +19,7 @@ $rewritten = [
     '/hr/liste_groupe',
     '/hr/traitement_demandes',
     '/hr/jours_chomes',
+    '/hr/jours_fermeture',
     '/admin/db_sauve',
 ];
 
