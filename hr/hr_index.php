@@ -40,36 +40,14 @@ $onglets['cloture_year'] = _('resp_cloture_exercice_titre');
 $onglets['liste_planning'] = _('hr_liste_planning');
 //$onglets['ajout_planning'] = _('hr_ajout_planning');
 
-if ( !isset($onglets[ $onglet ]) && !in_array($onglet, ['traite_user', 'modif_planning', 'ajout_planning', 'ajout_user', 'modif_user','suppr_user','liste_groupe','modif_groupe','ajout_groupe','suppr_groupe']))
+if ( !isset($onglets[ $onglet ]) && !in_array($onglet, ['traite_user', 'modif_planning', 'ajout_planning', 'ajout_user', 'modif_user','suppr_user','liste_groupe','modif_groupe','ajout_groupe','suppr_groupe'])) {
     $onglet = 'page_principale';
+}
 
-/*********************************/
-/*   COMPOSITION DU HEADER...    */
-/*********************************/
 
 $add_css = '<style>#onglet_menu .onglet{ width: '. (str_replace(',', '.', 100 / count($onglets) )).'% ;}</style>';
 header_menu('', 'Libertempo : '._('resp_menu_button_mode_hr'),$add_css);
-
-
-/*********************************/
-/*   AFFICHAGE DE L'ONGLET ...    */
-/*********************************/
-
-
-/** initialisation des tableaux des types de conges/absences  **/
-// recup du tableau des types de conges (seulement les conges)
-$tab_type_cong=recup_tableau_types_conges();
-
-// recup du tableau des types de conges exceptionnels (seulement les conges exceptionnels)
-$tab_type_conges_exceptionnels=recup_tableau_types_conges_exceptionnels();
-
 echo '<div class="'.$onglet.'" id="main-content">';
     include_once ROOT_PATH . 'hr/hr_'.$onglet.'.php';
 echo '</div>';
-
-/*********************************/
-/*   AFFICHAGE DU BOTTOM ...   */
-/*********************************/
-
 bottom();
-exit;
