@@ -57,7 +57,7 @@ echo "</div>\n";
 /*   AFFICHAGE DE L'ONGLET ...    */
 /*********************************/
 
-echo '<div class="' . $onglet . ' main-content">';
+echo '<div class="' . $onglet . '" id="main-content">';
 include ROOT_PATH . 'utilisateur/user_' . $onglet . '.php';
 echo '</div>';
 

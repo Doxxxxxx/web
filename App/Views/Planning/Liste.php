@@ -7,11 +7,10 @@
  * $lienModif
  */
 ?>
-<div id="inner-content">
-    <a v-if="isHr" href="<?= ROOT_PATH ?>hr/hr_index.php?onglet=ajout_planning" style="float:right" class="btn btn-success"><?= _('hr_ajout_planning') ?></a>
-    <h1><?= $titre ?></h1>
-    <?= $message ?>
-    <table class="table table-hover table-responsive table-condensed table-striped">
+<a v-if="isHr" href="<?= ROOT_PATH ?>hr/hr_index.php?onglet=ajout_planning" style="float:right" class="btn btn-success"><?= _('hr_ajout_planning') ?></a>
+<h1><?= $titre ?></h1>
+<?= $message ?>
+<table class="table table-hover table-responsive table-condensed table-striped">
     <thead>
         <tr><th><?= _('divers_nom_maj_1') ?></th><th style="width:10%"></th></tr>
     </thead>
@@ -37,8 +36,7 @@
         </td>
         </tr>
     </tbody>
-    </table>
-</div>
+</table>
 
 <script>
 const instance = axios.create({
@@ -52,7 +50,7 @@ const instance = axios.create({
 });
 
 var vm = new Vue({
-    el: '#inner-content',
+    el: '#main-content',
     data: {
         //plannings : <?= json_encode($plannings) ?>,
         plannings : '',
