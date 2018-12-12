@@ -28,5 +28,6 @@ $lienModif = 'hr_index.php?onglet=modif_planning';
 $isHr = true;
 $listPlanningId = \App\ProtoControllers\HautResponsable\Planning::getListPlanningId();
 $listIdUsed = \App\ProtoControllers\HautResponsable\Planning::getListPlanningUsed($listPlanningId);
+$plannings = [];
 
 require_once VIEW_PATH . 'Planning/Liste.php';
